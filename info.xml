@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <extension key="uk.co.mountev.numofattendances" type="module">
   <file>numofattendances</file>
-  <name>Compute Number of Attendances</name>
+  <name>Number of Attendances</name>
   <description>Extension to increment or compute number of attendances</description>
   <license>AGPL-3.0</license>
   <maintainer>
