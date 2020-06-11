@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <extension key="uk.co.mountev.numofattendances" type="module">
   <file>numofattendances</file>
-  <name>FIXME</name>
-  <description>FIXME</description>
+  <name>Compute Number of Attendances</name>
+  <description>Extension to increment or compute number of attendances</description>
   <license>AGPL-3.0</license>
   <maintainer>
     <author>Deepak Srivastava</author>
-    <email>deepak.srivastava.0303@gmail.com</email>
+    <email>deepak@mountev.co.uk</email>
   </maintainer>
   <urls>
-    <url desc="Main Extension Page">http://FIXME</url>
-    <url desc="Documentation">http://FIXME</url>
-    <url desc="Support">http://FIXME</url>
+    <url desc="Main Extension Page">https://github.com/mountev/uk.co.mountev.numofattendances</url>
+    <url desc="Documentation">https://github.com/mountev/uk.co.mountev.numofattendances</url>
+    <url desc="Support">https://github.com/mountev/uk.co.mountev.numofattendances</url>
     <url desc="Licensing">http://www.gnu.org/licenses/agpl-3.0.html</url>
   </urls>
   <releaseDate>2020-06-11</releaseDate>
@@ -20,7 +20,6 @@
   <compatibility>
     <ver>5.0</ver>
   </compatibility>
-  <comments>This is a new, undeveloped module</comments>
   <classloader>
     <psr4 prefix="Civi\" path="Civi"/>
   </classloader>

@@ -1,15 +1,13 @@
 # uk.co.mountev.numofattendances
 
-![Screenshot](/images/screenshot.png)
-
-(*FIXME: In one or two paragraphs, describe what the extension does and why one would download it. *)
+Extension to increment or compute number of attendances.
 
 The extension is licensed under [AGPL-3.0](LICENSE.txt).
 
 ## Requirements
 
 * PHP v7.0+
-* CiviCRM (*FIXME: Version number*)
+* CiviCRM v5.x
 
 ## Installation (Web UI)
 
