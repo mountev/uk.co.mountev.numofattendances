@@ -1,0 +1,7 @@
+[
+  {
+    "name": "numofattendance_increment_attendance",
+    "label": "Increment Number of Attendances",
+    "class_name": "CRM_CivirulesActions_Custom_IncrementAttendance"
+  }
+]
