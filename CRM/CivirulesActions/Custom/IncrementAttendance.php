@@ -27,6 +27,17 @@ class CRM_CivirulesActions_Custom_IncrementAttendance extends CRM_Civirules_Acti
     $activityContact = $triggerData->getEntityData('ActivityContact');
     $customFieldID   = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_CustomField', 'Number_of_Attendances', 'id', 'name');
     if ($customFieldID && !empty($activity) && !empty($activityContact)) {
+      $statusClause  = "";
+      $ruleCondition = new CRM_Civirules_BAO_RuleCondition();
+      $ruleCondition->rule_id = $triggerData->getTrigger()->getRuleId();
+      if ($ruleCondition->find(true)) {
+        $data = unserialize($ruleCondition->condition_params);
+        if (!empty($data['status_id'])) {
+          $op = !empty($data['operator']) ? 'NOT IN' : 'IN';
+          $statusClause = " AND a.status_id $op (" . implode(', ', $data['status_id']) . ")";
+        }
+      }
+
       if (empty($activity['activity_type_id']) && $activity['activity_id']) {
         // might be an update, for e.g from scheduled to completed
         $activity['activity_type_id'] = CRM_Core_DAO::getFieldValue("CRM_Activity_DAO_Activity", $activity['activity_id'], 'activity_type_id');
@@ -35,12 +46,11 @@ class CRM_CivirulesActions_Custom_IncrementAttendance extends CRM_Civirules_Acti
         FROM  civicrm_activity_contact ac
         JOIN  civicrm_activity a on ac.activity_id = a.id
         WHERE ac.contact_id = %1 AND ac.record_type_id = %2
-        AND   a.activity_type_id = %3 AND a.status_id = %4";
+        AND   a.activity_type_id = %3 {$statusClause}";
       $params = [
         1 => [$activityContact['contact_id'], 'Positive'],
         2 => [$activityContact['record_type_id'], 'Positive'],
         3 => [$activity['activity_type_id'], 'Positive'],
-        4 => [$activity['status_id'], 'Positive'],
       ];
       $num = CRM_Core_DAO::singleValueQuery($sql, $params);
       $result = civicrm_api3('CustomValue', 'create', array(
