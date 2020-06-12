@@ -27,6 +27,10 @@ class CRM_CivirulesActions_Custom_IncrementAttendance extends CRM_Civirules_Acti
     $activityContact = $triggerData->getEntityData('ActivityContact');
     $customFieldID   = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_CustomField', 'Number_of_Attendances', 'id', 'name');
     if ($customFieldID && !empty($activity) && !empty($activityContact)) {
+      if (empty($activity['activity_type_id']) && $activity['activity_id']) {
+        // might be an update, for e.g from scheduled to completed
+        $activity['activity_type_id'] = CRM_Core_DAO::getFieldValue("CRM_Activity_DAO_Activity", $activity['activity_id'], 'activity_type_id');
+      }
       $sql = "SELECT count(*) 
         FROM  civicrm_activity_contact ac
         JOIN  civicrm_activity a on ac.activity_id = a.id
